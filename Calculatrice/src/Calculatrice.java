@@ -107,7 +107,7 @@ public class Calculatrice extends JFrame {
 	    Bouton source = (Bouton) arg0.getSource();
 	    String textBouton = source.getText();
 
-	    if (source.getType() == TypeBouton.CHIFFRE) {
+	    if ((source.getType() == TypeBouton.CHIFFRE)) {
 		if (s.equals("0")) {
 		    s = "";
 		}
@@ -138,7 +138,7 @@ public class Calculatrice extends JFrame {
 		    operande2 = 0;
 		    op = getOp(textBouton);
 		    cleanRes = true;
-		    // opClicked=false;
+		    opClicked=false;
 		}
 
 	    }
@@ -146,8 +146,12 @@ public class Calculatrice extends JFrame {
 	    if (source.getType() == TypeBouton.AUTRE) {
 		switch (textBouton) {
 		case "=":
-		    resultat.setText("" + (calculer(operande1, operande2, op)));
+		    double resTemp = calculer(operande1, operande2, op);
+		    resultat.setText("" + resTemp);
+		    operande1 = resTemp;
+		    operande2 = 0;
 		    cleanRes = true;
+		    opClicked=false;
 		    break;
 
 		case "C":
@@ -157,6 +161,17 @@ public class Calculatrice extends JFrame {
 		    op = null;
 		    opClicked = false;
 		    break;
+
+		case ".":
+		    if (s.equals("")) {
+			resultat.setText("0.");
+			cleanRes=false;
+		    } else {
+			if (!s.contains(".")) {
+			    resultat.setText(s + ".");
+			}
+		    }
+
 		}
 	    }
 
