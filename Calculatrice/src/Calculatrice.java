@@ -138,7 +138,7 @@ public class Calculatrice extends JFrame {
 		    operande2 = 0;
 		    op = getOp(textBouton);
 		    cleanRes = true;
-		    opClicked=false;
+		    //opClicked=false;
 		}
 
 	    }
