@@ -14,114 +14,114 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-
 public class Calculatrice extends JFrame {
- 
- 
 
-	//Boutons nombres
-	private JLabel resultat = new JLabel("0");
-	private JButton bouton1 = new JButton("1");
-	private JButton bouton2 = new JButton("2");
-	private JButton bouton3 = new JButton("3");
-	private JButton bouton4 = new JButton("4");
-	private JButton bouton5 = new JButton("5");
-	private JButton bouton6 = new JButton("6");
-	private JButton bouton7 = new JButton("7");
-	private JButton bouton8 = new JButton("8");
-	private JButton bouton9 = new JButton("9");
-	private JButton bouton0 = new JButton("0");
-	private JButton bouton_point = new JButton(".");
-	private JButton bouton_egal = new JButton("=");
+ // Boutons nombres
+ private JLabel resultat = new JLabel("0");
+ private Bouton[] boutons = new Bouton[17];
+ /*
+  * private Bouton bouton1 = new Bouton("1",TypeBouton.CHIFFRE); private JButton
+  * bouton2 = new JButton("2"); private JButton bouton3 = new JButton("3");
+  * private JButton bouton4 = new JButton("4"); private JButton bouton5 = new
+  * JButton("5"); private JButton bouton6 = new JButton("6"); private JButton
+  * bouton7 = new JButton("7"); private JButton bouton8 = new JButton("8");
+  * private JButton bouton9 = new JButton("9"); private JButton bouton0 = new
+  * JButton("0"); private JButton bouton_point = new JButton("."); private
+  * JButton bouton_egal = new JButton("=");
+  */
 
-	//Boutons opérateurs
-	private JButton bouton_C = new JButton("C");
-	private JButton bouton_plus = new JButton("+");
-	private JButton bouton_moins = new JButton("-");
-	private JButton bouton_fois = new JButton("*");
-	private JButton bouton_divise = new JButton("/");
+ // Boutons opérateurs
+ private JButton bouton_C = new JButton("C");
+ private JButton bouton_plus = new JButton("+");
+ private JButton bouton_moins = new JButton("-");
+ private JButton bouton_fois = new JButton("*");
+ private JButton bouton_divise = new JButton("/");
 
+ private JPanel numbers_container = new JPanel();
+ private JPanel operators_container = new JPanel();
 
-	private JPanel numbers_container = new JPanel();
-	private JPanel operators_container = new JPanel();
+ public Calculatrice() {
+  this.setTitle("Calculatrice");
+  this.setSize(300, 300);
+  this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  this.setLocationRelativeTo(null);
 
+  // Initialisation des boutons de nombres
+  for (int i = 0; i < 10; i++) {
+   boutons[i] = new Bouton(Integer.toString(i), TypeBouton.CHIFFRE);
+  }
+  boutons[10] = new Bouton(".", TypeBouton.AUTRE);
+  boutons[11] = new Bouton("=", TypeBouton.AUTRE);
+  boutons[12] = new Bouton("C", TypeBouton.AUTRE);
+  boutons[13] = new Bouton("+", TypeBouton.OPERATEUR);
+  boutons[14] = new Bouton("-", TypeBouton.OPERATEUR);
+  boutons[15] = new Bouton("*", TypeBouton.OPERATEUR);
+  boutons[16] = new Bouton("/", TypeBouton.OPERATEUR);
 
-	public Calculatrice() {
-		this.setTitle("Calculatrice");
-		this.setSize(300, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+  this.setLayout(new BorderLayout());
 
-		//numbers_container.setBackground(Color.white);
-		//numbers_container.setLayout(new BorderLayout());
+  this.getContentPane().add(resultat, BorderLayout.NORTH);
+  numbers_container.setLayout(new GridLayout(4, 3));
 
-		this.setLayout(new BorderLayout());
+  for (int i = 1; i < 10; i++) {
+   numbers_container.add(boutons[i]);
+  }
+  numbers_container.add(boutons[0]);
 
+  numbers_container.add(boutons[10]);
+  numbers_container.add(boutons[11]);
 
-		this.getContentPane().add(resultat,BorderLayout.NORTH);
-		numbers_container.setLayout(new GridLayout(4, 3));
-		numbers_container.add(bouton1);
-		numbers_container.add(bouton2);
-		numbers_container.add(bouton3);
-		numbers_container.add(bouton3);
-		numbers_container.add(bouton4);
-		numbers_container.add(bouton5);
-		numbers_container.add(bouton6);
-		numbers_container.add(bouton7);
-		numbers_container.add(bouton8);
-		numbers_container.add(bouton9);
-		numbers_container.add(bouton0);
-		numbers_container.add(bouton_point);
-		numbers_container.add(bouton_egal);
-		this.getContentPane().add(numbers_container,BorderLayout.CENTER);
+  this.getContentPane().add(numbers_container, BorderLayout.CENTER);
 
-		operators_container.setLayout(new GridLayout(5, 1));
-		operators_container.add(bouton_C);
-		operators_container.add(bouton_plus);
-		operators_container.add(bouton_moins);
-		operators_container.add(bouton_fois);
-		operators_container.add(bouton_divise);
-		this.getContentPane().add(operators_container,BorderLayout.EAST);
-  //bouton1.addActionListener(new BoutonListener());
-  //bouton2.addActionListener(new BoutonListener());
-  //bouton3.addActionListener(new BoutonListener());
- for(Component c:numbers_container.getComponents()) {
-  JButton b = (JButton)c;
-  b.addActionListener(new BoutonListener());
+  operators_container.setLayout(new GridLayout(5, 1));
+  for (int i = 12; i < 17; i++) {
+   operators_container.add(boutons[i]);
+  }
+
+  this.getContentPane().add(operators_container, BorderLayout.EAST);
+
+  /*
+   * for(Component c:numbers_container.getComponents()) { JButton b =
+   * (JButton)c; b.addActionListener(new BoutonListener()); }
+   */
+
+  this.setVisible(true);
  }
 
-		this.setVisible(true);
-	}
+ class BoutonListener implements ActionListener {
+  public void actionPerformed(ActionEvent arg0) {
+   String s = resultat.getText();
+   if(s.equals("0")) {
+    s="";
+   }
 
+   Bouton source = (Bouton) arg0.getSource();
 
+   if (source.getType() == TypeBouton.CHIFFRE) {
+    resultat.setText(s + source.getText());
+   }
 
-	class BoutonListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		 
-		 Object source = arg0.getSource();
-		  if(source==bouton1) {
-		   resultat.setText(resultat.getText()+"1");
-		  }
-		  
-		  if(source==bouton2) {
-     resultat.setText(resultat.getText()+"2");
-    }
-		  
-		}
-	}
-	
-	
-	class Bouton extends JButton {
-	 private String text="";
-	 private TypeBouton type=TypeBouton.AUTRE;
-	 
-	 public Bouton(String s, TypeBouton type ) {
-	  this.text=s;
-	  this.type=type;
-	  this.addActionListener(new BoutonListener() );
-	 }
-	 
-	 
-	}
+  }
+ }
+
+ class Bouton extends JButton {
+  private String text = "";
+  private TypeBouton type = TypeBouton.AUTRE;
+
+  public Bouton(String s, TypeBouton type) {
+   this.text = s;
+   this.type = type;
+   this.addActionListener(new BoutonListener());
+  }
+
+  public String getText() {
+   return this.text;
+  }
+
+  public TypeBouton getType() {
+   return this.type;
+  }
+
+ }
 
 }
