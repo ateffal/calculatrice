@@ -1,4 +1,4 @@
 
 public enum Operateur {
- PLUS, FOIS, MOINS, DIVISE
+    PLUS, FOIS, MOINS, DIVISE
 }
