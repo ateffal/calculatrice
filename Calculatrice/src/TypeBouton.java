@@ -1,7 +1,4 @@
 
 public enum TypeBouton {
- CHIFFRE,
- OPERATEUR,
- AUTRE
-
+ CHIFFRE, OPERATEUR, AUTRE
 }
