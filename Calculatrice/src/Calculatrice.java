@@ -109,5 +109,19 @@ public class Calculatrice extends JFrame {
 		  
 		}
 	}
+	
+	
+	class Bouton extends JButton {
+	 private String text="";
+	 private TypeBouton type=TypeBouton.AUTRE;
+	 
+	 public Bouton(String s, TypeBouton type ) {
+	  this.text=s;
+	  this.type=type;
+	  this.addActionListener(new BoutonListener() );
+	 }
+	 
+	 
+	}
 
 }
