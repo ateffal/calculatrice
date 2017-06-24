@@ -16,6 +16,8 @@ import javax.swing.border.Border;
 
 
 public class Calculatrice extends JFrame {
+ 
+ 
 
 	//Boutons nombres
 	private JLabel resultat = new JLabel("0");
@@ -80,9 +82,13 @@ public class Calculatrice extends JFrame {
 		operators_container.add(bouton_fois);
 		operators_container.add(bouton_divise);
 		this.getContentPane().add(operators_container,BorderLayout.EAST);
-
-
-
+  //bouton1.addActionListener(new BoutonListener());
+  //bouton2.addActionListener(new BoutonListener());
+  //bouton3.addActionListener(new BoutonListener());
+ for(Component c:numbers_container.getComponents()) {
+  JButton b = (JButton)c;
+  b.addActionListener(new BoutonListener());
+ }
 
 		this.setVisible(true);
 	}
@@ -91,7 +97,16 @@ public class Calculatrice extends JFrame {
 
 	class BoutonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-
+		 
+		 Object source = arg0.getSource();
+		  if(source==bouton1) {
+		   resultat.setText(resultat.getText()+"1");
+		  }
+		  
+		  if(source==bouton2) {
+     resultat.setText(resultat.getText()+"2");
+    }
+		  
 		}
 	}
 
