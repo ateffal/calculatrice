@@ -34,7 +34,7 @@ public class Calculatrice extends JFrame {
 	private JButton bouton_point = new JButton(".");
 	private JButton bouton_egal = new JButton("=");
 
-	//Boutons opérateurs
+	//Boutons operateurs
 	private JButton bouton_C = new JButton("C");
 	private JButton bouton_plus = new JButton("+");
 	private JButton bouton_moins = new JButton("-");
